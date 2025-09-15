@@ -2,9 +2,9 @@ package factory;
 
 import org.opencv.core.Mat;
 import strategy.ColorFieldStrategy;
-import strategy.GreenColorFieldStrategy;
-import strategy.WhiteColorFieldStrategy;
-import strategy.OrangeColorFieldStrategy;
+import strategy.ColorFieldStrategyGreen;
+import strategy.ColorFieldStrategyWhite;
+import strategy.ColorFieldStrategyOrange;
 import util.ImageAnalyzer;
 import dto.DominantColor;
 
@@ -19,13 +19,13 @@ public class SportStrategyFactory {
 
         switch (dominantColor.getColor().toLowerCase()) {
             case "green":
-                strategy = new GreenColorFieldStrategy();
+                strategy = new ColorFieldStrategyGreen();
                 break;
             case "white":
-                strategy = new WhiteColorFieldStrategy();
+                strategy = new ColorFieldStrategyWhite();
                 break;
             case "orange":
-                strategy = new OrangeColorFieldStrategy();
+                strategy = new ColorFieldStrategyOrange();
                 break;
             default:
                 throw new IllegalArgumentException("No strategy for color: " + dominantColor.getColor());
