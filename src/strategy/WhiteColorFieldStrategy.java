@@ -9,10 +9,8 @@ public class WhiteColorFieldStrategy implements ColorFieldStrategy {
         System.out.println("Analyzing WHITE field for image: " + imageName);
         System.out.println("Dominant color: " + color + " (" + percentage + "%)");
 
-        if (percentage > 50) {
+        if (percentage > 40) {
             System.out.println("Likely Hockey");
-        } else {
-            System.out.println("Uncertain, may require further analysis");
         }
     }
 }

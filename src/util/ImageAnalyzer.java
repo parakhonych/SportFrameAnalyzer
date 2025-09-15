@@ -135,4 +135,32 @@ public class ImageAnalyzer {
         return false;
     }
 
+    /**
+     * Calculates the average saturation (S channel in HSV) within a specified color range.
+     *
+     * @param image      Input image (BGR)
+     * @param lowerBound Lower bound of HSV range
+     * @param upperBound Upper bound of HSV range
+     * @return Average saturation value
+     */
+    public static double calculateAverageSaturation(Mat image, Scalar lowerBound, Scalar upperBound) {
+        Mat hsv = new Mat();
+        Imgproc.cvtColor(image, hsv, Imgproc.COLOR_BGR2HSV);
+
+
+        Mat mask = new Mat();
+        Core.inRange(hsv, lowerBound, upperBound, mask);
+
+
+        Mat hsvMasked = new Mat();
+        Core.bitwise_and(hsv, hsv, hsvMasked, mask);
+
+
+        List<Mat> channels = new ArrayList<>();
+        Core.split(hsvMasked, channels);
+        Mat saturation = channels.get(1);
+
+        Scalar meanS = Core.mean(saturation, mask);
+        return meanS.val[0];
+    }
 }
