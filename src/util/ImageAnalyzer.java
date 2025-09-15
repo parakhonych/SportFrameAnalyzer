@@ -127,7 +127,6 @@ public class ImageAnalyzer {
 
         for (List<Double> group : groups) {
             if (group.size() >= 8) {
-                System.out.println("Found parallel lines: " + group.size());
                 return true;
             }
         }

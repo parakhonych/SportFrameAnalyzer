@@ -4,9 +4,25 @@ import dto.ImageData;
 
 public interface SportStrategy {
 
-    void lightCheck(ImageData imageData);
+    String lightResourcesAICheck(ImageData imageData);
 
-    void mediumCheck(ImageData imageData);
+    String mediumResourcesAICheck(ImageData imageData);
 
-    void heavyCheck(ImageData imageData);
+    String heavyResourcesAICheck(ImageData imageData);
+
+    default String formatText(ImageData imageData, String checkLevel, String sportType, String comment) {
+        String sportOutput;
+        if (imageData.getDominantColor().getPercentage() < 35) {
+            sportOutput = "Possible " + sportType + " (uncertain)";
+        } else {
+            sportOutput = sportType;
+        }
+        return "Image name: " + imageData.getImageName() + "\n" +
+                "Dominant color: " + imageData.getDominantColor().getColor() +
+                " (" + String.format("%.2f", imageData.getDominantColor().getPercentage()) + "%)\n" +
+                "Sport type: " + sportType + "\n" +
+                "Check level need: " + checkLevel + "\n" +
+                "Comment: " + comment;
+
+    }
 }

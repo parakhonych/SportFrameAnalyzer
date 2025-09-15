@@ -5,23 +5,26 @@ import dto.ImageData;
 public class SportStrategyBasketball implements SportStrategy {
 
     @Override
-    public void lightCheck(ImageData imageData) {
-        System.out.println("Basketball Light Check: "
-                + imageData.getImagePath()
-                + " (" + imageData.getDominantColor().getPercentage() + "%)");
+    public String lightResourcesAICheck(ImageData imageData) {
+        return formatText(imageData,
+                "Light",
+                "Basketball",
+                "Highly likely this is Basketball. \n Easy AI verification can be applied.");
     }
 
     @Override
-    public void mediumCheck(ImageData imageData) {
-        System.out.println("Basketball Medium Check: "
-                + imageData.getImagePath()
-                + " (" + imageData.getDominantColor().getPercentage() + "%)");
+    public String mediumResourcesAICheck(ImageData imageData) {
+        return formatText(imageData,
+                "Medium",
+                "Basketball",
+                "Likely Basketball, but some doubts remain.\n Moderate AI verification can be applied.");
     }
 
     @Override
-    public void heavyCheck(ImageData imageData) {
-        System.out.println("Basketball Heavy Check: "
-                + imageData.getImagePath()
-                + " (" + imageData.getDominantColor().getPercentage() + "%)");
+    public String heavyResourcesAICheck(ImageData imageData) {
+        return formatText(imageData,
+                "Heavy",
+                "Basketball",
+                "Significant doubts, some indications of Basketball.\n Intensive AI verification recommended.");
     }
 }

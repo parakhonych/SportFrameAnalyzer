@@ -1,27 +1,26 @@
 package strategy;
 
 import dto.ImageData;
-import org.opencv.core.Mat;
 
 public class ColorFieldStrategyWhite implements ColorFieldStrategy {
 
     @Override
-    public void analyze(ImageData imageData) {
-        System.out.println("Analyzing WHITE field for image: " + imageData.getImagePath());
-        System.out.println("Dominant color: "
-                + imageData.getDominantColor().getColor()
-                + " (" + imageData.getDominantColor().getPercentage() + "%)");
-
+    public String analyze(ImageData imageData) {
         SportStrategy strategy = new SportStrategyHockey();
 
         double percentage = imageData.getDominantColor().getPercentage();
 
+        String resultText;
+
         if (percentage > 70) {
-            strategy.lightCheck(imageData);
+            resultText = strategy.lightResourcesAICheck(imageData);
         } else if (percentage > 40) {
-            strategy.mediumCheck(imageData);
+            resultText = strategy.mediumResourcesAICheck(imageData);
         } else {
-            strategy.heavyCheck(imageData);
+            resultText = strategy.heavyResourcesAICheck(imageData);
         }
+
+        return "Field of the white type \n" +
+                resultText;
     }
 }

@@ -6,13 +6,10 @@ import util.ImageAnalyzer;
 public class ColorFieldStrategyGreen implements ColorFieldStrategy {
 
     @Override
-    public void analyze(ImageData imageData) {
-        System.out.println("Analyzing GREEN field for image: " + imageData.getImageName());
-        System.out.println("Dominant color: " + imageData.getDominantColor().getColor() +
-                " (" + imageData.getDominantColor().getPercentage() + "%)");
-
+    public String analyze(ImageData imageData) {
         SportStrategy strategy;
         boolean hasParallelLines = ImageAnalyzer.detectParallelLines(imageData.getImage());
+
         if (hasParallelLines) {
             strategy = new SportStrategyFootball();
         } else {
@@ -20,12 +17,18 @@ public class ColorFieldStrategyGreen implements ColorFieldStrategy {
         }
 
         double percentage = imageData.getDominantColor().getPercentage();
+        String resultText;
+
         if (percentage > 70) {
-            strategy.lightCheck(imageData);
+            resultText = strategy.lightResourcesAICheck(imageData);
         } else if (percentage > 40) {
-            strategy.mediumCheck(imageData);
+            resultText = strategy.mediumResourcesAICheck(imageData);
         } else {
-            strategy.heavyCheck(imageData);
+            resultText = strategy.heavyResourcesAICheck(imageData);
         }
+
+        return "Field of the green type \n" +
+                resultText;
+
     }
 }

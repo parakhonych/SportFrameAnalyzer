@@ -10,12 +10,9 @@ import util.ImageAnalyzer;
 
 public class SportStrategyFactory {
 
-    public void executeStrategy(ImageData imageData) {
+    public String executeStrategy(ImageData imageData) {
         DominantColor dominantColor = ImageAnalyzer.getDominantColor(imageData.getImage());
         imageData.setDominantColor(dominantColor);
-
-        System.out.println("Dominant color: " + dominantColor.getColor() +
-                " (" + dominantColor.getPercentage() + "%)");
 
         ColorFieldStrategy strategy;
 
@@ -32,7 +29,8 @@ public class SportStrategyFactory {
             default:
                 throw new IllegalArgumentException("No strategy for color: " + dominantColor.getColor());
         }
-
-        strategy.analyze(imageData);
+        
+        return strategy.analyze(imageData);
     }
+
 }

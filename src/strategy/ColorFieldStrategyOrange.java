@@ -7,12 +7,7 @@ import util.ImageAnalyzer;
 public class ColorFieldStrategyOrange implements ColorFieldStrategy {
 
     @Override
-    public void analyze(ImageData imageData) {
-        System.out.println("Analyzing ORANGE field for image: " + imageData.getImagePath());
-        System.out.println("Dominant color: "
-                + imageData.getDominantColor().getColor()
-                + " (" + imageData.getDominantColor().getPercentage() + "%)");
-
+    public String analyze(ImageData imageData) {
         SportStrategy strategy;
 
         Scalar lowerOrange = new Scalar(5, 100, 100);
@@ -28,13 +23,17 @@ public class ColorFieldStrategyOrange implements ColorFieldStrategy {
         }
 
         double percentage = imageData.getDominantColor().getPercentage();
+        String resultText;
 
         if (percentage > 70) {
-            strategy.lightCheck(imageData);
+            resultText = strategy.lightResourcesAICheck(imageData);
         } else if (percentage > 40) {
-            strategy.mediumCheck(imageData);
+            resultText = strategy.mediumResourcesAICheck(imageData);
         } else {
-            strategy.heavyCheck(imageData);
+            resultText = strategy.heavyResourcesAICheck(imageData);
         }
+
+        return "Field of the orange type \n" +
+                resultText;
     }
 }
