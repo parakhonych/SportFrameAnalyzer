@@ -1,29 +1,31 @@
 package strategy;
 
-import org.opencv.core.Mat;
+import dto.ImageData;
 import util.ImageAnalyzer;
 
 public class ColorFieldStrategyGreen implements ColorFieldStrategy {
 
     @Override
-    public void analyze(String color, double percentage, String imageName, Mat image) {
-        System.out.println("Analyzing GREEN field for image: " + imageName);
-        System.out.println("Dominant color: " + color + " (" + percentage + "%)");
+    public void analyze(ImageData imageData) {
+        System.out.println("Analyzing GREEN field for image: " + imageData.getImageName());
+        System.out.println("Dominant color: " + imageData.getDominantColor().getColor() +
+                " (" + imageData.getDominantColor().getPercentage() + "%)");
+
         SportStrategy strategy;
-        boolean hasParallelLines = ImageAnalyzer.detectParallelLines(image);
+        boolean hasParallelLines = ImageAnalyzer.detectParallelLines(imageData.getImage());
         if (hasParallelLines) {
-            strategy = new SportStrategyFootball(); // American football
+            strategy = new SportStrategyFootball();
         } else {
-            strategy = new SportStrategySoccer(); // Regular soccer
+            strategy = new SportStrategySoccer();
         }
 
-        // Decide level of check based on dominant percentage
+        double percentage = imageData.getDominantColor().getPercentage();
         if (percentage > 70) {
-            strategy.lightCheck(imageName, percentage, image);
+            strategy.lightCheck(imageData);
         } else if (percentage > 40) {
-            strategy.mediumCheck(imageName, percentage, image);
+            strategy.mediumCheck(imageData);
         } else {
-            strategy.heavyCheck(imageName, percentage, image);
+            strategy.heavyCheck(imageData);
         }
     }
 }

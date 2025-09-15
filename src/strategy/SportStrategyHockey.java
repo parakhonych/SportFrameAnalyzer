@@ -1,21 +1,27 @@
 package strategy;
 
-import org.opencv.core.Mat;
+import dto.ImageData;
 
 public class SportStrategyHockey implements SportStrategy {
 
     @Override
-    public void lightCheck(String imageName, double dominantPercentage, Mat image) {
-        System.out.println("Hockey Light Check: " + imageName + " (" + dominantPercentage + "% white)");
+    public void lightCheck(ImageData imageData) {
+        System.out.println("Hockey Light Check: "
+                + imageData.getImagePath()
+                + " (" + imageData.getDominantColor().getPercentage() + "% white)");
     }
 
     @Override
-    public void mediumCheck(String imageName, double dominantPercentage, Mat image) {
-        System.out.println("Hockey Medium Check: " + imageName + " (" + dominantPercentage + "% white)");
+    public void mediumCheck(ImageData imageData) {
+        System.out.println("Hockey Medium Check: "
+                + imageData.getImagePath()
+                + " (" + imageData.getDominantColor().getPercentage() + "% white)");
     }
 
     @Override
-    public void heavyCheck(String imageName, double dominantPercentage, Mat image) {
-        System.out.println("Hockey Heavy Check: " + imageName + " (" + dominantPercentage + "% white)");
+    public void heavyCheck(ImageData imageData) {
+        System.out.println("Hockey Heavy Check: "
+                + imageData.getImagePath()
+                + " (" + imageData.getDominantColor().getPercentage() + "% white)");
     }
 }

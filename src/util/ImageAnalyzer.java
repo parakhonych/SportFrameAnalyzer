@@ -28,15 +28,15 @@ public class ImageAnalyzer {
         for (int i = 0; i < hsv.rows(); i++) {
             for (int j = 0; j < hsv.cols(); j++) {
                 double[] pixel = hsv.get(i, j);
-                double h = pixel[0]; // Hue
-                double s = pixel[1]; // Saturation
-                double v = pixel[2]; // Value
+                double h = pixel[0];
+                double s = pixel[1];
+                double v = pixel[2];
 
-                if (s < 30 && v > 200) { // White
+                if (s < 30 && v > 200) {
                     whiteCount++;
-                } else if (h >= 35 && h <= 85) { // Green
+                } else if (h >= 35 && h <= 85) {
                     greenCount++;
-                } else if (h >= 10 && h <= 25) { // Orange
+                } else if (h >= 10 && h <= 25) {
                     orangeCount++;
                 }
             }

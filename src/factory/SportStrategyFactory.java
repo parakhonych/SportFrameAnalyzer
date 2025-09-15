@@ -1,19 +1,21 @@
 package factory;
 
-import org.opencv.core.Mat;
+import dto.ImageData;
 import strategy.ColorFieldStrategy;
 import strategy.ColorFieldStrategyGreen;
 import strategy.ColorFieldStrategyWhite;
 import strategy.ColorFieldStrategyOrange;
-import util.ImageAnalyzer;
 import dto.DominantColor;
+import util.ImageAnalyzer;
 
 public class SportStrategyFactory {
 
-    public static void executeStrategy(String imageName, Mat image) {
+    public void executeStrategy(ImageData imageData) {
+        DominantColor dominantColor = ImageAnalyzer.getDominantColor(imageData.getImage());
+        imageData.setDominantColor(dominantColor);
 
-        DominantColor dominantColor = ImageAnalyzer.getDominantColor(image);
-        System.out.println("Dominant color: " + dominantColor.getColor() + " (" + dominantColor.getPercentage() + "%)");
+        System.out.println("Dominant color: " + dominantColor.getColor() +
+                " (" + dominantColor.getPercentage() + "%)");
 
         ColorFieldStrategy strategy;
 
@@ -31,7 +33,6 @@ public class SportStrategyFactory {
                 throw new IllegalArgumentException("No strategy for color: " + dominantColor.getColor());
         }
 
-
-        strategy.analyze(dominantColor.getColor(), dominantColor.getPercentage(), imageName, image);
+        strategy.analyze(imageData);
     }
 }

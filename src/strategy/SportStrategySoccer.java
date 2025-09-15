@@ -1,20 +1,27 @@
 package strategy;
 
-import org.opencv.core.Mat;
+import dto.ImageData;
 
 public class SportStrategySoccer implements SportStrategy {
+
     @Override
-    public void lightCheck(String imageName, double dominantPercentage, Mat image) {
-        System.out.println("Soccer Light Check: " + imageName + " (" + dominantPercentage + "% green)");
+    public void lightCheck(ImageData imageData) {
+        System.out.println("Soccer Light Check: "
+                + imageData.getImagePath()
+                + " (" + imageData.getDominantColor().getPercentage() + "% green)");
     }
 
     @Override
-    public void mediumCheck(String imageName, double dominantPercentage, Mat image) {
-        System.out.println("Soccer Medium Check: " + imageName + " (" + dominantPercentage + "% green)");
+    public void mediumCheck(ImageData imageData) {
+        System.out.println("Soccer Medium Check: "
+                + imageData.getImagePath()
+                + " (" + imageData.getDominantColor().getPercentage() + "% green)");
     }
 
     @Override
-    public void heavyCheck(String imageName, double dominantPercentage, Mat image) {
-        System.out.println("Soccer Heavy Check: " + imageName + " (" + dominantPercentage + "% green)");
+    public void heavyCheck(ImageData imageData) {
+        System.out.println("Soccer Heavy Check: "
+                + imageData.getImagePath()
+                + " (" + imageData.getDominantColor().getPercentage() + "% green)");
     }
 }

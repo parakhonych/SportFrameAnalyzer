@@ -1,8 +1,8 @@
 package dto;
 
 public class DominantColor {
-    private String color;
-    private double percentage;
+    private final String color;
+    private final double percentage;
 
     public DominantColor(String color, double percentage) {
         this.color = color;
