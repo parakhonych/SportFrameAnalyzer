@@ -10,11 +10,8 @@ public class ColorFieldStrategyOrange implements ColorFieldStrategy {
     public String analyze(ImageData imageData) {
         SportStrategy strategy;
 
-        Scalar lowerOrange = new Scalar(5, 100, 100);
-        Scalar upperOrange = new Scalar(25, 255, 255);
-
         double avgSaturation = ImageAnalyzer.calculateAverageSaturation(
-                imageData.getImage(), lowerOrange, upperOrange);
+                imageData.getImage());
 
         if (avgSaturation > 150) {
             strategy = new SportStrategyTennis();

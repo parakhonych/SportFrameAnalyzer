@@ -18,7 +18,6 @@ public class ImageAnalyzer {
      * - colorName: name of the dominant color ("green", "white", or "orange")
      * - percentage: percentage of the image covered by this color
      */
-
     public static DominantColor getDominantColor(Mat image) {
         Mat hsv = new Mat();
         Imgproc.cvtColor(image, hsv, Imgproc.COLOR_BGR2HSV);
@@ -32,17 +31,23 @@ public class ImageAnalyzer {
                 double s = pixel[1];
                 double v = pixel[2];
 
+                // Low saturation (almost no color) and high brightness → white
                 if (s < 30 && v > 200) {
                     whiteCount++;
-                } else if (h >= 35 && h <= 85) {
+                }
+                // Hue between 35 and 85 → green shades
+                else if (h >= 35 && h <= 85) {
                     greenCount++;
-                } else if (h >= 10 && h <= 25) {
+                }
+                // Hue between 10 and 25 → orange shades
+                else if (h >= 10 && h <= 25) {
                     orangeCount++;
                 }
             }
         }
 
         int total = hsv.rows() * hsv.cols();
+
         double greenPerc = (greenCount * 100.0) / total;
         double whitePerc = (whiteCount * 100.0) / total;
         double orangePerc = (orangeCount * 100.0) / total;
@@ -59,32 +64,24 @@ public class ImageAnalyzer {
 
     /**
      * Detects parallel white lines in the given image.
-     * <p>
-     * This function converts the image to grayscale, applies Gaussian blur,
-     * performs Canny edge detection, and then detects lines using the Probabilistic Hough Transform.
-     * It groups detected lines by angle and returns true if a group of at least 8 parallel lines is found.
      *
      * @param image The input image (Mat) in BGR color space.
-     * @return true if there is a group of at least 8 parallel white lines, false otherwise.
+     * @return true if there is a group of parallel white lines, otherwise false.
      */
     public static boolean detectParallelLines(Mat image) {
 
         Mat hsv = new Mat();
         Imgproc.cvtColor(image, hsv, Imgproc.COLOR_BGR2HSV);
-
-
         Scalar lowerWhite = new Scalar(0, 0, 200);
         Scalar upperWhite = new Scalar(180, 30, 255);
         Mat whiteMask = new Mat();
         Core.inRange(hsv, lowerWhite, upperWhite, whiteMask);
-
 
         Mat blurred = new Mat();
         Imgproc.GaussianBlur(whiteMask, blurred, new Size(5, 5), 0);
 
         Mat edges = new Mat();
         Imgproc.Canny(blurred, edges, 50, 150);
-
 
         Mat lines = new Mat();
         Imgproc.HoughLinesP(edges, lines, 1, Math.PI / 180, 100, 100, 20);
@@ -137,18 +134,19 @@ public class ImageAnalyzer {
     /**
      * Calculates the average saturation (S channel in HSV) within a specified color range.
      *
-     * @param image      Input image (BGR)
-     * @param lowerBound Lower bound of HSV range
-     * @param upperBound Upper bound of HSV range
+     * @param image Input image (BGR)
      * @return Average saturation value
      */
-    public static double calculateAverageSaturation(Mat image, Scalar lowerBound, Scalar upperBound) {
+    public static double calculateAverageSaturation(Mat image) {
+        Scalar lowerOrange = new Scalar(5, 100, 100);
+        Scalar upperOrange = new Scalar(25, 255, 255);
+
         Mat hsv = new Mat();
         Imgproc.cvtColor(image, hsv, Imgproc.COLOR_BGR2HSV);
 
 
         Mat mask = new Mat();
-        Core.inRange(hsv, lowerBound, upperBound, mask);
+        Core.inRange(hsv, lowerOrange, upperOrange, mask);
 
 
         Mat hsvMasked = new Mat();
