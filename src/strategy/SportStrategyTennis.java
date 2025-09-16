@@ -8,23 +8,23 @@ public class SportStrategyTennis implements SportStrategy {
     public String lightResourcesAICheck(ImageData imageData) {
         return formatText(imageData,
                 "Light",
-                "Tennis",
-                "Highly likely this is Tennis. \n Easy AI verification can be applied.");
+                "Tennis on clay",
+                "Highly likely this is Tennis on clay. \nEasy AI verification can be applied.");
     }
 
     @Override
     public String mediumResourcesAICheck(ImageData imageData) {
         return formatText(imageData,
                 "Medium",
-                "Tennis",
-                "Likely Tennis, but some doubts remain.\n Moderate AI verification can be applied.");
+                "Tennis on clay",
+                "Likely Tennis on clay, but some doubts remain.\nModerate AI verification can be applied.");
     }
 
     @Override
     public String heavyResourcesAICheck(ImageData imageData) {
         return formatText(imageData,
                 "Heavy",
-                "Tennis",
-                "Significant doubts, some indications of Tennis.\n Intensive AI verification recommended.");
+                "Tennis on clay",
+                "Significant doubts, some indications of Tennis on clay.\nIntensive AI verification recommended.");
     }
 }

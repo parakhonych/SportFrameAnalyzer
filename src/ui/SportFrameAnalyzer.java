@@ -30,7 +30,9 @@ public class SportFrameAnalyzer extends JFrame {
 
         infoArea = new JTextArea();
         infoArea.setEditable(false);
-        infoArea.setPreferredSize(new Dimension(400, 800));
+        infoArea.setPreferredSize(new Dimension(550, 800));
+        infoArea.setMargin(new Insets(2, 5, 2, 2));
+        infoArea.setFont(new Font("Arial", Font.PLAIN, 20));
 
         openButton = new JButton("Open Image");
         openButton.addActionListener(this::selectImage);

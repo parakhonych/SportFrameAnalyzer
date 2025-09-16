@@ -1,7 +1,142 @@
-# SportFrameAnalyzer
+# Sport Image Analyzer (Demo)
 
-a Java demo program that analyzes image frames to determine whether they are likely from a sports event, using the
-dominant color as a heuristic. Designed for educational and demonstration purposes.
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Project Structure](#project-structure)
+- [How to Run](#how-to-run)
+- [Example Output](#example-output)
+- [License](#license)
+- [Image Sources](#image-sources)
+
+## Overview
+
+**Sport Image Analyzer** is a demo application designed as a **pre-filter for sports content analysis**.
+Its main goal is to quickly determine the likely type of sport shown in an image based on the **field/court type and
+dominant colors**.
+The program also estimates the **required level of computational resources** for further AI-based verification.
+
+The core approach is to prioritize accuracy: **it is better to show a few non-sport frames than to miss an important
+moment in a game**.
+
+## Features
+
+- **Detects dominant field color**: green, white, orange, etc.
+- **Identifies the sport type**: Football, Soccer, Basketball, Hockey, Tennis, etc.
+- **Estimates required AI resources for verification**:
+    - **Light** → highly likely correct sport
+    - **Medium** → some doubts remain
+    - **Heavy** → significant doubts
+- **User Interface**:
+    - Select an image using a file chooser
+    - Image is displayed scaled within a frame
+    - Results are shown in a fixed text area
+
+## Technologies Used
+
+- **Java** – the project requires Java.
+- **Swing** – used for building the graphical user interface (GUI).
+- **OpenCV** – for image processing and analyzing sports fields.
+
+## Project Structure
+
+- `src/` – main Java source files
+    - `dto/` – classes for image data and dominant color
+    - `factory/` – strategy factory
+    - `strategy/` – sport and color strategies
+    - `ui/` – user interface classes
+    - `util/` – utility classes (e.g., ImageAnalyzer)
+- `images/` – sample images for testing
+- `README.md` – project documentation
+
+## How to Run
+
+1. Make sure you have **Java 17+** installed.
+2. Download the project or clone the repository.
+3. Build the project using your IDE (e.g., IntelliJ) or via command line with Maven/Gradle if configured.
+4. Run the `Main` class:
+   ```bash
+   java -cp path/to/your/classes Main
+   ```
+
+## Example Output
+
+When an image is provided to the program, it analyzes the image and returns an estimated result. For example:
+
+**Input Image:**
+```image016.jpg```
+**Output:**
+
+```
+Field of the green type
+Image name: image016.jpg
+Dominant color: Green (42.26%)
+Sport type: Soccer
+Check level need: Medium
+Comment: Likely Soccer, but some doubts remain.
+Moderate AI verification can be applied.
+```
+
+### Examples
+
+Hockey match example 1 – correctly detected. Dominant white color (54.32%), medium AI resources recommended for
+verification.
+
+![Hockey match example 1](examples/example1.png)
+
+Hockey match example 2 – correctly detected. Dominant white color (48.30%), medium AI resources recommended for
+verification.
+
+![Hockey match example 2](examples/example2.png)
+
+Tennis match example 1 – correctly detected. Dominant Orange color (81.93%), light AI resources recommended for
+verification.
+
+![Tennis match example](examples/example3.png)
+
+Basketball/Tennis example – program differentiates between Basketball and Tennis based on brightness.
+Dominant orange color (26.84%), intensive AI resources recommended for verification.
+
+![Basketball match example](examples/example4.png)
+
+Football example – correctly detected. Dominant green color (50.88%), medium AI resources recommended.
+Differentiates from Soccer by detecting parallel lines within the green field area.
+
+![Football match example 1](examples/example5.png)
+
+Soccer example – correctly detected. Dominant green color (42.26%), medium AI resources recommended.
+
+![Soccer match example](examples/example6.png)
+
+American Football example – program correctly detected, but low green dominance (14.28%)
+due to extensive team colors (blue). Significant AI resources recommended for accurate verification.
+
+![Footbal match example 2](examples/example9.png)
+
+Example of advertising – the program recognizes it as probable tennis, but with a low confidence level (20.14% dominant
+color).  
+Due to the uncertainty, significant artificial intelligence resources are required for verification so that the system
+can correctly
+distinguish it from a real sporting event. However, this is the main idea behind allocating key AI
+resources to cases with a higher probability that it will not be a sporting event.
+
+![Ad example 1](examples/example7.png)
+
+Snow advertisement during a hockey match – visually realistic but complicates recognition.  
+High dominant white percentage (similar to actual hockey ice) may mislead the algorithm; alternative AI-based methods
+are recommended for accurate detection.
+
+![Ad example 1](examples/example8.png)
+
+## License
+
+This project is released under the MIT License.  
+You are free to use, modify, and distribute the code for educational and non-commercial purposes.
+
+The images included in this project are for **educational/demo purposes only** and are credited to their respective
+authors.
 
 ## Image Sources
 

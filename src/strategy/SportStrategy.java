@@ -20,7 +20,7 @@ public interface SportStrategy {
         return "Image name: " + imageData.getImageName() + "\n" +
                 "Dominant color: " + imageData.getDominantColor().getColor() +
                 " (" + String.format("%.2f", imageData.getDominantColor().getPercentage()) + "%)\n" +
-                "Sport type: " + sportType + "\n" +
+                "Sport type: " + sportOutput + "\n" +
                 "Check level need: " + checkLevel + "\n" +
                 "Comment: " + comment;
 

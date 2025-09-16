@@ -9,7 +9,7 @@ public class SportStrategySoccer implements SportStrategy {
         return formatText(imageData,
                 "Light",
                 "Soccer",
-                "Highly likely this is Soccer. \n Easy AI verification can be applied.");
+                "Highly likely this is Soccer. \nEasy AI verification can be applied.");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class SportStrategySoccer implements SportStrategy {
         return formatText(imageData,
                 "Medium",
                 "Soccer",
-                "Likely Soccer, but some doubts remain.\n Moderate AI verification can be applied.");
+                "Likely Soccer, but some doubts remain.\nModerate AI verification can be applied.");
     }
 
     @Override
@@ -25,6 +25,6 @@ public class SportStrategySoccer implements SportStrategy {
         return formatText(imageData,
                 "Heavy",
                 "Soccer",
-                "Significant doubts, some indications of Soccer.\n Intensive AI verification recommended.");
+                "Significant doubts, some indications of Soccer.\nIntensive AI verification recommended.");
     }
 }
