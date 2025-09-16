@@ -16,7 +16,10 @@ public class SportFrameAnalyzer extends JFrame {
     private JTextArea infoArea;
     private JButton openButton;
 
-    public SportFrameAnalyzer() {
+    private final SportStrategyFactory factory;
+
+    public SportFrameAnalyzer(SportStrategyFactory factory) {
+        this.factory = factory;
         setTitle("Sport Frame Analyzer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -60,8 +63,10 @@ public class SportFrameAnalyzer extends JFrame {
             }
 
             ImageData imageData = new ImageData(path, image);
-            SportStrategyFactory factory = new SportStrategyFactory();
-            infoArea.setText(factory.executeStrategy(imageData));
+
+
+            String result = factory.executeStrategy(imageData);
+            infoArea.setText(result);
 
             int panelWidth = imagePanel.getWidth();
             int panelHeight = imagePanel.getHeight();
@@ -73,8 +78,6 @@ public class SportFrameAnalyzer extends JFrame {
                     (int) (img.getHeight(null) * scale),
                     Image.SCALE_SMOOTH);
             imageLabel.setIcon(new ImageIcon(scaledImg));
-
-
         }
     }
 }
